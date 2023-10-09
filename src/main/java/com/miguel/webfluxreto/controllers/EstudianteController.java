@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.util.Comparator;
 
 @RestController
 @RequestMapping("/estudiante")
@@ -21,10 +22,12 @@ public class EstudianteController {
     private final EstudianteService estudianteService;
 
     @GetMapping
-    public Mono<ResponseEntity<Flux<Estudiante>>> findAll() {
+    public Mono<ResponseEntity<Flux<Estudiante>>> findAll(@RequestParam(defaultValue = "asc") String order) {
         return Mono.just(ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(estudianteService.findAll())
+                .body(
+                        order.equals("desc") ? estudianteService.findAll().sort(Comparator.reverseOrder())
+                                : estudianteService.findAll().sort())
         );
     }
 

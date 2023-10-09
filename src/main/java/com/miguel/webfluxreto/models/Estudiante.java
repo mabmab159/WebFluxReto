@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "estudiante")
-public class Estudiante {
+public class Estudiante implements Comparable<Estudiante> {
     @Id
     private String id;
     @NotBlank
@@ -25,4 +25,9 @@ public class Estudiante {
     private String dni;
     @Min(value = 1)
     private int edad;
+
+    @Override
+    public int compareTo(Estudiante o) {
+        return Integer.compare(this.getEdad(), o.getEdad());
+    }
 }
