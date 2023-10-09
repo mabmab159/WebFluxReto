@@ -1,11 +1,11 @@
 package com.miguel.webfluxreto.models;
 
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @AllArgsConstructor
@@ -14,10 +14,13 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Curso {
     @Id
     private String id;
-    @Field
+    @NotBlank
+    @Size(min = 4)
     private String nombre;
-    @Field
+    @NotBlank
+    @Size(min = 2)
     private String siglas;
-    @Field
+    @NotNull
+    @NotBlank
     private Boolean estado;
 }
