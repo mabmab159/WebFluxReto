@@ -41,6 +41,12 @@ public class RegistroServiceImpl implements RegistroService {
         return registroRepository.save(registro);
     }
 
+    @Override
+    public Mono<Boolean> deleteById(String id) {
+        return registroRepository.findById(id).hasElement().flatMap(e ->
+                e ? registroRepository.deleteById(id).thenReturn(true) : Mono.just(false));
+    }
+
     private Mono<Registro> llenarEstudiante(Registro registro) {
         return estudianteRepository.findById(registro.getEstudiante().getId())
                 .map(estudiante -> {

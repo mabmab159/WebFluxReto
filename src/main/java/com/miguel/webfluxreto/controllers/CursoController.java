@@ -2,6 +2,7 @@ package com.miguel.webfluxreto.controllers;
 
 import com.miguel.webfluxreto.models.Curso;
 import com.miguel.webfluxreto.service.CursoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class CursoController {
     }
 
     @PostMapping
-    public Mono<ResponseEntity<Object>> save(@RequestBody Curso curso, final ServerHttpRequest request) {
+    public Mono<ResponseEntity<Object>> save(@Valid @RequestBody Curso curso, final ServerHttpRequest request) {
         return cursoService.save(curso)
                 .map(e -> ResponseEntity.created(
                                 URI.create(request.getURI()

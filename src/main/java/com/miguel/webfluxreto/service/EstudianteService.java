@@ -7,5 +7,9 @@ import reactor.core.publisher.Mono;
 public interface EstudianteService {
     Flux<Estudiante> findAll();
 
+    Mono<Estudiante> findById(String id);
+
     Mono<Estudiante> save(Estudiante estudiante);
+
+    Mono<Boolean> deleteById(String id);
 }

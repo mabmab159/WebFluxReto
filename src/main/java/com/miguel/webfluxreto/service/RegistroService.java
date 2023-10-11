@@ -10,4 +10,6 @@ public interface RegistroService {
     Mono<Registro> findById(String estudiante);
 
     Mono<Registro> save(Registro registroMatricula);
+
+    Mono<Boolean> deleteById(String id);
 }

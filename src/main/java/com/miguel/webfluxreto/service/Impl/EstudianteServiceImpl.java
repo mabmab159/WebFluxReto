@@ -20,7 +20,18 @@ public class EstudianteServiceImpl implements EstudianteService {
     }
 
     @Override
+    public Mono<Estudiante> findById(String id) {
+        return estudianteRepository.findById(id);
+    }
+
+    @Override
     public Mono<Estudiante> save(Estudiante estudiante) {
         return estudianteRepository.save(estudiante);
+    }
+
+    @Override
+    public Mono<Boolean> deleteById(String id) {
+        return estudianteRepository.findById(id).hasElement().flatMap(e ->
+                e ? estudianteRepository.deleteById(id).thenReturn(true) : Mono.just(false));
     }
 }

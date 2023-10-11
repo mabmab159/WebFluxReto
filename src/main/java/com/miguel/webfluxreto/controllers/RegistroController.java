@@ -2,6 +2,7 @@ package com.miguel.webfluxreto.controllers;
 
 import com.miguel.webfluxreto.models.Registro;
 import com.miguel.webfluxreto.service.RegistroService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class RegistroController {
     private final RegistroService registroService;
+
     @GetMapping
     public Mono<ResponseEntity<Flux<Registro>>> findAll() {
         return Mono.just(ResponseEntity.ok()
@@ -36,7 +38,7 @@ public class RegistroController {
     }
 
     @PostMapping
-    public Mono<ResponseEntity<Object>> save(@RequestBody Registro registro, final ServerHttpRequest request) {
+    public Mono<ResponseEntity<Object>> save(@Valid @RequestBody Registro registro, final ServerHttpRequest request) {
         registro.setFechaMatricula(LocalDateTime.now());
         return registroService.save(registro)
                 .map(e -> ResponseEntity.created(
@@ -52,6 +54,11 @@ public class RegistroController {
                 );
     }
 
-
-
+    @DeleteMapping("/{id}")
+    public Mono<ResponseEntity<Object>> deleteById(@PathVariable("id") String id) {
+        return registroService.deleteById(id)
+                .flatMap(e -> e ? Mono.just(ResponseEntity.noContent().build())
+                        : Mono.just(ResponseEntity.notFound().build()))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
 }

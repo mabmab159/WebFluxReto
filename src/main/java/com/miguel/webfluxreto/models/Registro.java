@@ -1,5 +1,8 @@
 package com.miguel.webfluxreto.models;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,8 +22,16 @@ public class Registro {
     @Id
     @EqualsAndHashCode.Include
     private String id;
+    @NotNull
+    @NotBlank
     private LocalDateTime fechaMatricula;
+    @NotNull
+    @NotEmpty
     private Estudiante estudiante;
+    @NotNull
+    @NotEmpty
     private List<Curso> cursos;
+    @NotNull
+    @NotBlank
     private Boolean estado;
 }

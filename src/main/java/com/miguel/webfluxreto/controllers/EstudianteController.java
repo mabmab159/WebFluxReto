@@ -31,6 +31,14 @@ public class EstudianteController {
         );
     }
 
+    @GetMapping("/{id}")
+    public Mono<ResponseEntity<Estudiante>> findById(@PathVariable("id") String id) {
+        return estudianteService.findById(id).map(e -> ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(e))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public Mono<ResponseEntity<Object>> save(@Valid @RequestBody Estudiante estudiante, final ServerHttpRequest request) {
         return estudianteService.save(estudiante).map(e ->
@@ -45,5 +53,13 @@ public class EstudianteController {
                         .contentType(MediaType.APPLICATION_JSON)
                         .build()
         );
+    }
+
+    @DeleteMapping("/{id}")
+    public Mono<ResponseEntity<Object>> deleteById(@PathVariable("id") String id) {
+        return estudianteService.deleteById(id)
+                .flatMap(e -> e ? Mono.just(ResponseEntity.noContent().build())
+                        : Mono.just(ResponseEntity.notFound().build()))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 }
