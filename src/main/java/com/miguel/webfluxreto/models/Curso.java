@@ -24,6 +24,5 @@ public class Curso {
     @Size(min = 2)
     private String siglas;
     @NotNull
-    @NotBlank
     private Boolean estado;
 }

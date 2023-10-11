@@ -55,6 +55,16 @@ public class EstudianteController {
         );
     }
 
+    @PutMapping("/{id}")
+    public Mono<ResponseEntity<Estudiante>> updateById(@PathVariable("id") String id
+            , @Valid @RequestBody Estudiante estudiante) {
+        return estudianteService.updateById(id, estudiante).map(e ->
+                ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(e)
+        );
+    }
+
     @DeleteMapping("/{id}")
     public Mono<ResponseEntity<Object>> deleteById(@PathVariable("id") String id) {
         return estudianteService.deleteById(id)

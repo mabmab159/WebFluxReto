@@ -11,5 +11,7 @@ public interface EstudianteService {
 
     Mono<Estudiante> save(Estudiante estudiante);
 
+    Mono<Estudiante> updateById(String id, Estudiante estudiante);
+
     Mono<Boolean> deleteById(String id);
 }

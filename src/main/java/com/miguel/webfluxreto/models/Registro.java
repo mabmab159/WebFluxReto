@@ -32,6 +32,5 @@ public class Registro {
     @NotEmpty
     private List<Curso> cursos;
     @NotNull
-    @NotBlank
     private Boolean estado;
 }

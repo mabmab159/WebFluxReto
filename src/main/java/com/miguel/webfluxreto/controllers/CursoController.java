@@ -51,6 +51,16 @@ public class CursoController {
                         .build());
     }
 
+    @PutMapping("/{id}")
+    public Mono<ResponseEntity<Curso>> updateById(@PathVariable("id") String id,
+                                                  @Valid @RequestBody Curso curso) {
+        return cursoService.updateById(id, curso).map(e ->
+                ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(e)
+        ).defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
     public Mono<ResponseEntity<Object>> deleteById(@PathVariable("id") String id) {
         return cursoService.deleteById(id)

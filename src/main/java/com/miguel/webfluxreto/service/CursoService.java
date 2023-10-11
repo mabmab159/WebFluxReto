@@ -8,5 +8,6 @@ public interface CursoService {
     Flux<Curso> findAll();
     Mono<Curso> findById(String id);
     Mono<Curso> save(Curso curso);
+    Mono<Curso> updateById(String id, Curso curso);
     Mono<Boolean> deleteById(String id);
 }

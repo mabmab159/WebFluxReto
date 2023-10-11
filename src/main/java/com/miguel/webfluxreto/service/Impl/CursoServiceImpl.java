@@ -30,6 +30,16 @@ public class CursoServiceImpl implements CursoService {
     }
 
     @Override
+    public Mono<Curso> updateById(String id, Curso curso) {
+        return cursoRepository.findById(id).flatMap(e ->
+        {
+            if (e != null)
+                curso.setId(id);
+            return cursoRepository.save(curso);
+        });
+    }
+
+    @Override
     public Mono<Boolean> deleteById(String id) {
         return cursoRepository.findById(id).hasElement().flatMap(e ->
                 e ? cursoRepository.deleteById(id).thenReturn(true) : Mono.just(false));
