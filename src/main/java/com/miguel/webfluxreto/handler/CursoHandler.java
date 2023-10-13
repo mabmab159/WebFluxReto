@@ -29,14 +29,13 @@ public class CursoHandler {
         String id = req.pathVariable("id");
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters
-                        .fromValue(cursoService.findById(id))
-                );
+                .body(cursoService.findById(id), Curso.class);
     }
 
     public Mono<ServerResponse> create(ServerRequest req) {
         return req.bodyToMono(Curso.class)
                 .flatMap(this.requestValidator::validate)
+                .flatMap(cursoService::save)
                 .flatMap(e -> ServerResponse.created(
                                         URI.create(req.uri()
                                                 .toString()
@@ -61,7 +60,7 @@ public class CursoHandler {
                 .flatMap(this.requestValidator::validate)
                 .flatMap(p -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromValue(cursoService.save(p))));
+                        .body(cursoService.save(p), Curso.class));
     }
 
     public Mono<ServerResponse> delete(ServerRequest req) {

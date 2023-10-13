@@ -29,14 +29,13 @@ public class EstudianteHandler {
         String id = req.pathVariable("id");
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters
-                        .fromValue(estudianteService.findById(id))
-                );
+                .body(estudianteService.findById(id), Estudiante.class);
     }
 
     public Mono<ServerResponse> create(ServerRequest req) {
         return req.bodyToMono(Estudiante.class)
                 .flatMap(this.requestValidator::validate)
+                .flatMap(estudianteService::save)
                 .flatMap(e -> ServerResponse.created(
                                         URI.create(req.uri()
                                                 .toString()
@@ -61,7 +60,7 @@ public class EstudianteHandler {
                 .flatMap(this.requestValidator::validate)
                 .flatMap(p -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromValue(estudianteService.save(p))));
+                        .body(estudianteService.save(p), Estudiante.class));
     }
 
     public Mono<ServerResponse> delete(ServerRequest req) {
