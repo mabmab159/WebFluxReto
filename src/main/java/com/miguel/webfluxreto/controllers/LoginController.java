@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +26,6 @@ public class LoginController {
 
     @PostMapping
     public Mono<ResponseEntity<?>> login(@RequestBody AuthRequest authRequest) {
-        System.out.println(BCrypt.hashpw("123", BCrypt.gensalt()));
         return service.searchByUser(authRequest.getUsername())
                 .map(user -> {
                     if (BCrypt.checkpw(authRequest.getPassword(), user.getPassword())) {
