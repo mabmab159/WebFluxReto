@@ -1,7 +1,7 @@
 package com.miguel.webfluxreto.controllers;
 
 import com.miguel.webfluxreto.models.Registro;
-import com.miguel.webfluxreto.service.RegistroService;
+import com.miguel.webfluxreto.service.IRegistroService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @RequestMapping("/registro")
 @RequiredArgsConstructor
 public class RegistroController {
-    private final RegistroService registroService;
+    private final IRegistroService registroService;
 
     @GetMapping
     public Mono<ResponseEntity<Flux<Registro>>> findAll() {

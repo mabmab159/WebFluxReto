@@ -1,7 +1,7 @@
 package com.miguel.webfluxreto.handler;
 
 import com.miguel.webfluxreto.models.Registro;
-import com.miguel.webfluxreto.service.RegistroService;
+import com.miguel.webfluxreto.service.IRegistroService;
 import com.miguel.webfluxreto.validator.RequestValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ import java.net.URI;
 @Component
 @RequiredArgsConstructor
 public class RegistroHandler {
-    private final RegistroService registroService;
+    private final IRegistroService registroService;
     private final RequestValidator requestValidator;
 
     public Mono<ServerResponse> findAll(ServerRequest req) {

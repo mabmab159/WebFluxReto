@@ -1,7 +1,7 @@
 package com.miguel.webfluxreto.controllers;
 
 import com.miguel.webfluxreto.models.Estudiante;
-import com.miguel.webfluxreto.service.EstudianteService;
+import com.miguel.webfluxreto.service.IEstudianteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -19,7 +19,7 @@ import java.util.Comparator;
 @RequiredArgsConstructor
 public class EstudianteController {
 
-    private final EstudianteService estudianteService;
+    private final IEstudianteService estudianteService;
 
     @GetMapping
     public Mono<ResponseEntity<Flux<Estudiante>>> findAll(@RequestParam(defaultValue = "asc") String order) {

@@ -5,7 +5,7 @@ import com.miguel.webfluxreto.models.Registro;
 import com.miguel.webfluxreto.repositories.CursoRepository;
 import com.miguel.webfluxreto.repositories.EstudianteRepository;
 import com.miguel.webfluxreto.repositories.RegistroRepository;
-import com.miguel.webfluxreto.service.RegistroService;
+import com.miguel.webfluxreto.service.IRegistroService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RegistroServiceImpl implements RegistroService {
+public class RegistroServiceImpl implements IRegistroService {
 
     private final RegistroRepository registroRepository;
     private final CursoRepository cursoRepository;

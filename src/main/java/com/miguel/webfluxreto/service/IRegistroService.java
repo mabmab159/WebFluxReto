@@ -4,7 +4,7 @@ import com.miguel.webfluxreto.models.Registro;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface RegistroService {
+public interface IRegistroService {
     Flux<Registro> findAll();
 
     Mono<Registro> findById(String estudiante);

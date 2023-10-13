@@ -1,7 +1,7 @@
 package com.miguel.webfluxreto.controllers;
 
 import com.miguel.webfluxreto.models.Curso;
-import com.miguel.webfluxreto.service.CursoService;
+import com.miguel.webfluxreto.service.ICursoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,7 +18,7 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class CursoController {
 
-    private final CursoService cursoService;
+    private final ICursoService cursoService;
 
     @GetMapping
     public Mono<ResponseEntity<Flux<Curso>>> findAll() {

@@ -1,7 +1,7 @@
 package com.miguel.webfluxreto.handler;
 
 import com.miguel.webfluxreto.models.Curso;
-import com.miguel.webfluxreto.service.CursoService;
+import com.miguel.webfluxreto.service.ICursoService;
 import com.miguel.webfluxreto.validator.RequestValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ import java.net.URI;
 @Component
 @RequiredArgsConstructor
 public class CursoHandler {
-    private final CursoService cursoService;
+    private final ICursoService cursoService;
     private final RequestValidator requestValidator;
 
     public Mono<ServerResponse> findAll(ServerRequest req) {

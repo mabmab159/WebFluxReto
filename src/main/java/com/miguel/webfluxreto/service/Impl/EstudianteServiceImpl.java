@@ -2,7 +2,7 @@ package com.miguel.webfluxreto.service.Impl;
 
 import com.miguel.webfluxreto.models.Estudiante;
 import com.miguel.webfluxreto.repositories.EstudianteRepository;
-import com.miguel.webfluxreto.service.EstudianteService;
+import com.miguel.webfluxreto.service.IEstudianteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-public class EstudianteServiceImpl implements EstudianteService {
+public class EstudianteServiceImpl implements IEstudianteService {
 
     private final EstudianteRepository estudianteRepository;
 
